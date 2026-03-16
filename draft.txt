@@ -1,0 +1,17 @@
+Modern portfolio website inspired by Product Hunt where each project is displayed like a launched product.
+Optimize for Freelance and Remote work.
+
+The homepage should feature:
+- a hero section
+- featured projects
+- a grid of product cards
+- category filters
+- project detail pages
+
+Use modern UI patterns such as:
+- card hover effects
+- screenshot previews
+- tech stack badges
+- smooth animations
+
+The website should feel like a product discovery platform for mobile apps and developer tools.
