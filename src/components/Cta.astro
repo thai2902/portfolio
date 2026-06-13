@@ -1,4 +1,5 @@
 ---
+import settingsData from '../data/settings.json';
 ---
 <section class="py-24 border-t border-gray-200 mt-20">
   <div class="max-w-4xl mx-auto px-4 text-center">
@@ -8,7 +9,7 @@
     <p class="text-xl text-gray-500 font-light mb-10 max-w-2xl mx-auto">
       I'm currently available for freelance projects and new opportunities. Let's build something great together.
     </p>
-    <a href="mailto:contact@example.com" class="inline-flex justify-center items-center px-8 py-4 text-base font-semibold text-white bg-black hover:bg-slate-800 transition-colors">
+    <a href={`mailto:${settingsData.contactEmail}`} class="inline-flex justify-center items-center px-8 py-4 text-base font-semibold text-white bg-black hover:bg-slate-800 transition-colors">
       Start a Conversation
     </a>
   </div>

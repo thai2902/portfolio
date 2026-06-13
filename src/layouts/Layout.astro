@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import seoData from '../data/seo.json';
 
 interface Props {
 	title: string;
@@ -10,8 +11,8 @@ interface Props {
 
 const { 
 	title, 
-	description = "A curated showcase of applications, MVPs, and experiments.",
-	image = "/favicon.svg",
+	description = seoData.siteDescription,
+	image = seoData.ogImage,
 	type = "website"
 } = Astro.props;
 
@@ -25,7 +26,7 @@ const schema = {
   "url": canonicalURL.href,
   "author": {
     "@type": "Person",
-    "name": "Portfolio Owner"
+    "name": seoData.authorName
   }
 };
 ---

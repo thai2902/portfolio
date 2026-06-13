@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Cta from '../../components/Cta.astro';
+import settingsData from '../../data/settings.json';
 
 export async function getStaticPaths() {
   const apps = await getCollection('apps');
@@ -118,7 +119,7 @@ const imageSrc = fallbackImages[data.id % fallbackImages.length];
 
   <Cta />
 
-  <footer class="py-8 text-center text-[var(--color-secondary)] text-sm">
-    <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
+  <footer class="py-12 text-center text-gray-400 text-sm">
+    <p>&copy; {new Date().getFullYear()} {settingsData.portfolioOwner}. All rights reserved.</p>
   </footer>
 </Layout>

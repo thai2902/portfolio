@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import AppCard from '../components/AppCard.astro';
 import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
+import settingsData from '../data/settings.json';
 
 const allApps = await getCollection('apps');
 const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
@@ -42,8 +43,8 @@ const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
 
   <Cta />
 
-  <footer class="py-8 text-center text-[var(--color-secondary)] text-sm">
-    <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
+  <footer class="py-12 text-center text-gray-400 text-sm">
+    <p>&copy; {new Date().getFullYear()} {settingsData.portfolioOwner}. All rights reserved.</p>
   </footer>
 
   <script>

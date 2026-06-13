@@ -1,4 +1,4 @@
-import { config, fields, collection } from '@keystatic/core';
+import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
   storage: {
@@ -31,5 +31,33 @@ export default config({
         }),
       },
     }),
+  },
+  singletons: {
+    seo: singleton({
+      label: 'SEO Settings',
+      path: 'src/data/seo',
+      format: { data: 'json' },
+      schema: {
+        siteTitle: fields.text({ label: 'Global Site Title', defaultValue: 'Digital Portfolio' }),
+        siteDescription: fields.text({ label: 'Global Site Description', multiline: true }),
+        ogImage: fields.image({
+          label: 'Global Open Graph Image',
+          directory: 'public/images/seo',
+          publicPath: '/images/seo'
+        }),
+        authorName: fields.text({ label: 'Author Name (for JSON-LD)' }),
+        twitterHandle: fields.text({ label: 'Twitter Handle' }),
+      }
+    }),
+    settings: singleton({
+      label: 'Global Settings',
+      path: 'src/data/settings',
+      format: { data: 'json' },
+      schema: {
+        portfolioOwner: fields.text({ label: 'Owner Name (Footer)' }),
+        contactEmail: fields.text({ label: 'Contact Email (CTA)' }),
+        availableForHire: fields.checkbox({ label: 'Available for freelance work', defaultValue: true }),
+      }
+    })
   },
 });
