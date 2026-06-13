@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import AppCard from '../components/AppCard.astro';
+import { getCollection } from 'astro:content';
+
+const allApps = await getCollection('apps');
+const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
+---
+
+<Layout title="Portfolio | App Showcase">
+  <Header />
+  
+  <main class="max-w-6xl mx-auto px-4 pb-20">
+    <div class="mb-12 mt-8">
+      <h2 class="text-2xl font-bold mb-4 tracking-tight">Project Catalog</h2>
+      <p class="text-[var(--color-secondary)] max-w-2xl leading-relaxed text-lg">
+        A curated collection of freelance projects, standalone apps, and minimum viable products (MVPs). Each concept is designed to solve real user problems and showcase technical execution.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+      {sortedApps.map((app) => (
+        <AppCard app={app} />
+      ))}
+    </div>
+  </main>
+
+  <footer class="py-8 border-t border-gray-200 text-center text-[var(--color-secondary)] text-sm">
+    <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
+  </footer>
+</Layout>
