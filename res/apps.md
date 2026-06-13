@@ -8,7 +8,7 @@ updatedAt: "2026-06-13"
 # Portfolio App Ideas
 
 ## 01. English Speaking Practice
-**Status:** Detailed  
+**Status:** In-Progress  
 **ROI:** High  
 **Short:** App luyện nói tiếng Anh cho người đi làm và trẻ em.  
 **Why:** Phù hợp đúng thế mạnh cá nhân của bạn, dễ demo AI voice, lesson flow, recording, và user progress.  
@@ -16,7 +16,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/english-speaking-practice.jpg
 
 ## 02. AI Resume Builder
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** Tạo CV nhanh từ profile và job target.  
 **Why:** Nhu cầu thật, dễ test market, dễ bán premium export PDF.  
@@ -24,7 +24,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/ai-resume-builder.jpg
 
 ## 03. Invoice Generator
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** Tạo hóa đơn cho freelancer và small business.  
 **Why:** Dễ làm, rất hợp portfolio freelance, có thể monetization bằng export, branding, template pack.  
@@ -32,7 +32,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/invoice-generator.jpg
 
 ## 04. Expense Tracker
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** Quản lý chi tiêu cá nhân với biểu đồ.  
 **Why:** MVP rõ ràng, demo tốt kỹ năng state management và charts.  
@@ -40,7 +40,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/expense-tracker.jpg
 
 ## 05. POD Niche Finder
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** Gợi ý niche cho Print-on-Demand/Etsy.  
 **Why:** Khớp đúng hướng business của bạn, có thể test nhu cầu seller thật nhanh.  
@@ -48,7 +48,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/pod-niche-finder.jpg
 
 ## 06. Etsy Product Planner
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** Lập kế hoạch sản phẩm digital/POD trên Etsy.  
 **Why:** Hữu ích cho seller, dễ chuyển thành SaaS nhỏ hoặc template product.  
@@ -56,7 +56,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/etsy-product-planner.jpg
 
 ## 07. AI Habit Tracker
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** Theo dõi thói quen với gợi ý thông minh.  
 **Why:** Dễ làm đẹp, dễ giữ chân user bằng streak và reminder.  
@@ -64,7 +64,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/ai-habit-tracker.jpg
 
 ## 08. Budget AI App
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** App quản lý ngân sách cá nhân có gợi ý AI.  
 **Why:** Nhu cầu lớn, có thể test subscription với premium insights.  
@@ -72,7 +72,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/budget-ai-app.jpg
 
 ## 09. Freelance Portal
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** Cổng quản lý project, client, và task cho freelancer.  
 **Why:** Rất hợp portfolio vì thể hiện tư duy sản phẩm và quy trình làm việc.  
@@ -80,7 +80,7 @@ updatedAt: "2026-06-13"
 **Image:** /images/apps/freelance-portal.jpg
 
 ## 10. Interview Prep App
-**Status:** Detailed  
+**Status:** TODO  
 **ROI:** High  
 **Short:** Ôn interview cho mobile developer.  
 **Why:** Khớp hoàn toàn với định hướng nghề nghiệp của bạn, dễ build content mở rộng.  

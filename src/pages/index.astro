@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import AppCard from '../components/AppCard.astro';
+import { getCollection } from 'astro:content';
+
+const allApps = await getCollection('apps');
+const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
+---
+
+<Layout title="Portfolio | App Showcase">
+  <Hero />
+  
+  <main id="projects" class="max-w-6xl mx-auto px-4 pb-20 pt-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 border-b border-gray-200 pb-4">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900">Project Catalog</h2>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 filter-nav">
+        <button class="filter-btn active text-black font-semibold text-sm" data-filter="all">All</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="ai">AI & Tech</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="productivity">Productivity</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="finance">Finance</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="education">Education</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="health">Health</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="lifestyle">Lifestyle</button>
+      </nav>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+      {sortedApps.map((app) => (
+        <AppCard app={app} />
+      ))}
+    </div>
+  </main>
+
+  <footer class="py-8 border-t border-gray-200 text-center text-[var(--color-secondary)] text-sm mt-12">
+    <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.app-card');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          buttons.forEach(btn => {
+            btn.classList.remove('active', 'text-black', 'font-semibold');
+            btn.classList.add('text-gray-400', 'font-medium');
+          });
+          
+          button.classList.remove('text-gray-400', 'font-medium');
+          button.classList.add('active', 'text-black', 'font-semibold');
+
+          const filter = button.getAttribute('data-filter');
+
+          cards.forEach((card) => {
+            const htmlCard = card as HTMLElement;
+            const category = htmlCard.getAttribute('data-category');
+            
+            if (filter === 'all' || category === filter) {
+              htmlCard.style.display = 'flex';
+              setTimeout(() => {
+                // If it's a coming soon card, we keep it semi-transparent
+                const isComingSoon = htmlCard.innerText.toLowerCase().includes('coming soon');
+                htmlCard.style.opacity = isComingSoon ? '0.5' : '1';
+                htmlCard.style.transform = 'scale(1)';
+              }, 10);
+            } else {
+              htmlCard.style.opacity = '0';
+              htmlCard.style.transform = 'scale(0.95)';
+              setTimeout(() => {
+                if (htmlCard.style.opacity === '0') {
+                  htmlCard.style.display = 'none';
+                }
+              }, 500);
+            }
+          });
+        });
+      });
+    });
+  </script>
+</Layout>
