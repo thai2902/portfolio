@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
 import AppCard from '../components/AppCard.astro';
 import { getCollection } from 'astro:content';
 
@@ -9,10 +9,10 @@ const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
 ---
 
 <Layout title="Portfolio | App Showcase">
-  <Header />
+  <Hero />
   
-  <main class="max-w-6xl mx-auto px-4 pb-20">
-    <div class="mb-12 mt-8">
+  <main id="projects" class="max-w-6xl mx-auto px-4 pb-20 pt-10">
+    <div class="mb-12">
       <h2 class="text-2xl font-bold mb-4 tracking-tight">Project Catalog</h2>
       <p class="text-[var(--color-secondary)] max-w-2xl leading-relaxed text-lg">
         A curated collection of freelance projects, standalone apps, and minimum viable products (MVPs). Each concept is designed to solve real user problems and showcase technical execution.
