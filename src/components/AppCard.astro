@@ -11,58 +11,7 @@ const { data } = app;
 const isComingSoon = data.status.toLowerCase().includes("coming soon");
 ---
 
-<article
-  class={`group relative flex flex-col h-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 ${isComingSoon ? "opacity-50 hover:opacity-100" : "hover:-translate-y-1 hover:shadow-lg cursor-pointer"}`}
->
-  <div class="p-6 flex-grow flex flex-col">
-    <div class="flex items-start justify-between gap-4">
-      <h2
-        class={`text-xl font-semibold leading-tight transition-colors duration-200 ${!isComingSoon ? "group-hover:text-[var(--color-accent)]" : ""}`}
-      >
-        <!-- <span class="text-gray-400 font-medium mr-1"
-          >{data.id.toString().padStart(2, "0")}.</span
-        > -->
-        {data.title}
-      </h2>
-    </div>
-    {
-      isComingSoon && (
-        <div>
-          <span
-            class={`shrink-0 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${isComingSoon ? "bg-gray-100 text-gray-600" : "bg-blue-50 text-[var(--color-accent)] border border-blue-100"}`}
-          >
-            {data.status}
-          </span>
-        </div>
-      )
-    }
-
-    {
-      !isComingSoon && data.short && (
-        <p class="text-[var(--color-secondary)] mb-6 text-sm leading-relaxed">
-          {data.short}
-        </p>
-      )
-    }
-
-    {
-      !isComingSoon && (
-        <div class="space-y-4 mt-auto">
-          {data.features && (
-            <div class="text-sm">
-              <strong class="block font-medium text-gray-900 mb-1">
-                Key Features
-              </strong>
-              <span class="text-gray-600 line-clamp-2" title={data.features}>
-                {data.features}
-              </span>
-            </div>
-          )}
-        </div>
-      )
-    }
-  </div>
-
+<article class={`group flex flex-col h-full bg-white border border-gray-200 transition-colors duration-300 ${isComingSoon ? "opacity-50" : "hover:border-black cursor-pointer"}`}>
   {
     (() => {
       const fallbackImages = [
@@ -75,15 +24,42 @@ const isComingSoon = data.status.toLowerCase().includes("coming soon");
       const imageSrc = fallbackImages[data.id % fallbackImages.length];
 
       return (
-        <div class="relative h-48 w-full bg-slate-50 overflow-hidden border-t border-gray-100 mt-auto flex-shrink-0 group-hover:bg-slate-100 transition-colors">
+        <div class="relative h-56 w-full bg-gray-100 overflow-hidden border-b border-gray-100">
           <img
             src={imageSrc}
             alt={data.title}
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            class={`w-full h-full object-cover transition-all duration-700 ${!isComingSoon ? "group-hover:scale-105" : "opacity-50"}`}
             loading="lazy"
           />
         </div>
       );
     })()
   }
+
+  <div class="flex-grow flex flex-col p-5">
+    <div class="mb-3">
+      <h2 class="text-lg font-semibold leading-tight text-black mb-1">
+        {data.title}
+      </h2>
+      <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">
+        {data.status}
+      </div>
+    </div>
+
+    {
+      !isComingSoon && data.short && (
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+          {data.short}
+        </p>
+      )
+    }
+    
+    {
+      !isComingSoon && data.features && (
+        <p class="text-gray-500 text-xs leading-relaxed line-clamp-2">
+          {data.features}
+        </p>
+      )
+    }
+  </div>
 </article>
