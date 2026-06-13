@@ -5,6 +5,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
+import react from '@astrojs/react';
+import keystatic from '@keystatic/astro';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
@@ -12,5 +15,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap()]
+  integrations: [sitemap(), react(), keystatic()]
 });
