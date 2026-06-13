@@ -9,9 +9,10 @@ const { app } = Astro.props;
 const { data } = app;
 
 const isComingSoon = data.status.toLowerCase().includes("coming soon");
+const isFeatured = data.featured === true;
 ---
 
-<article class={`group flex flex-col h-full bg-white border border-gray-200 transition-colors duration-300 ${isComingSoon ? "opacity-50" : "hover:border-black cursor-pointer"}`}>
+<article class={`group flex flex-col h-full bg-white border border-gray-200 transition-colors duration-300 ${isFeatured ? "md:col-span-2" : ""} ${isComingSoon ? "opacity-50" : "hover:border-black cursor-pointer"}`}>
   {
     (() => {
       const fallbackImages = [
@@ -24,7 +25,7 @@ const isComingSoon = data.status.toLowerCase().includes("coming soon");
       const imageSrc = fallbackImages[data.id % fallbackImages.length];
 
       return (
-        <div class="relative h-56 w-full bg-gray-100 overflow-hidden border-b border-gray-100">
+        <div class={`relative w-full bg-gray-100 mb-5 overflow-hidden border-b border-gray-100 ${isFeatured ? "h-64 sm:h-80 md:h-[400px]" : "h-64"}`}>
           <img
             src={imageSrc}
             alt={data.title}
