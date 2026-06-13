@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import AppCard from '../components/AppCard.astro';
+import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
 
 const allApps = await getCollection('apps');
@@ -35,7 +36,9 @@ const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
     </div>
   </main>
 
-  <footer class="py-8 border-t border-gray-200 text-center text-[var(--color-secondary)] text-sm mt-12">
+  <Cta />
+
+  <footer class="py-8 text-center text-[var(--color-secondary)] text-sm">
     <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
   </footer>
 

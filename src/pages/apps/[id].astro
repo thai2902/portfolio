@@ -1,0 +1,119 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Cta from '../../components/Cta.astro';
+
+export async function getStaticPaths() {
+  const apps = await getCollection('apps');
+  return apps.map(app => ({
+    params: { id: app.id },
+    props: { app },
+  }));
+}
+
+const { app } = Astro.props;
+const { data } = app;
+const { Content } = await render(app);
+
+// Use same image logic for consistency
+const fallbackImages = [
+  "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=1200&q=80",
+];
+const imageSrc = fallbackImages[data.id % fallbackImages.length];
+---
+
+<Layout title={`${data.title} | Portfolio`}>
+  <article class="max-w-5xl mx-auto px-4 py-12 lg:py-20">
+    <!-- Back Navigation -->
+    <a href="/#projects" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-black transition-colors mb-10">
+      <span class="mr-2">&larr;</span> Back to Portfolio
+    </a>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <span class="px-3 py-1 bg-black text-white text-xs font-semibold uppercase tracking-wider">
+          {data.category}
+        </span>
+        <span class="px-3 py-1 border border-gray-200 text-gray-600 text-xs font-medium uppercase tracking-wider">
+          {data.status}
+        </span>
+      </div>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] mb-6">
+        {data.title}
+      </h1>
+      {data.short && (
+        <p class="text-xl text-gray-500 font-light leading-relaxed max-w-3xl">
+          {data.short}
+        </p>
+      )}
+    </header>
+
+    <!-- Hero Image -->
+    <div class="relative w-full h-[40vh] min-h-[300px] md:h-[60vh] bg-gray-100 mb-16 border border-gray-200 overflow-hidden">
+      <img
+        src={imageSrc}
+        alt={data.title}
+        class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700"
+      />
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
+      
+      <!-- Left Column: Main Content -->
+      <div class="md:col-span-2 prose prose-lg prose-slate max-w-none">
+        {data.why && (
+          <div class="mb-10 p-6 bg-gray-50 border-l-4 border-black">
+            <h3 class="text-lg font-semibold text-black mt-0 mb-2">Why this project?</h3>
+            <p class="text-gray-700 m-0 text-base">{data.why}</p>
+          </div>
+        )}
+        
+        <h2 class="text-2xl font-bold text-black mb-4">Overview & Features</h2>
+        <p class="text-gray-600 leading-relaxed mb-8">
+          {data.features || "Detailed information about this project is currently being compiled. Stay tuned for more updates on features, technical stack, and outcomes."}
+        </p>
+        
+        <!-- Render markdown body if exists -->
+        <Content />
+      </div>
+
+      <!-- Right Column: Meta Sidebar -->
+      <aside class="space-y-8">
+        <div class="border-t border-gray-200 pt-6">
+          <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Role</h4>
+          <p class="font-medium text-black">Product Builder</p>
+        </div>
+        
+        <div class="border-t border-gray-200 pt-6">
+          <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Domain</h4>
+          <p class="font-medium text-black">{data.category}</p>
+        </div>
+        
+        {data.roi && (
+          <div class="border-t border-gray-200 pt-6">
+            <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Impact / ROI</h4>
+            <p class="font-medium text-black">{data.roi}</p>
+          </div>
+        )}
+        
+        <div class="border-t border-gray-200 pt-6">
+          <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Status</h4>
+          <p class="font-medium text-black">{data.status}</p>
+        </div>
+      </aside>
+      
+    </div>
+  </article>
+
+  <Cta />
+
+  <footer class="py-8 text-center text-[var(--color-secondary)] text-sm">
+    <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
+  </footer>
+</Layout>

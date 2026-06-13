@@ -12,9 +12,10 @@ const isComingSoon = data.status.toLowerCase().includes("coming soon");
 const isFeatured = data.featured === true;
 ---
 
-<article 
+<a 
+  href={`/apps/${app.id}`}
   data-category={data.category?.toLowerCase() || 'other'}
-  class={`app-card group flex flex-col h-full bg-white border border-gray-200 transition-colors duration-300 ${isFeatured ? "md:col-span-2" : ""} ${isComingSoon ? "opacity-50" : "hover:border-black cursor-pointer"}`}
+  class={`block app-card group flex flex-col h-full bg-white border border-gray-200 transition-colors duration-300 ${isFeatured ? "md:col-span-2" : ""} ${isComingSoon ? "opacity-50" : "hover:border-black cursor-pointer"}`}
 >
   {
     (() => {
@@ -72,4 +73,4 @@ const isFeatured = data.featured === true;
       )
     }
   </div>
-</article>
+</a>
