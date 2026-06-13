@@ -3,9 +3,31 @@ import '../styles/global.css';
 
 interface Props {
 	title: string;
+	description?: string;
+	image?: string;
+	type?: 'website' | 'article';
 }
 
-const { title } = Astro.props;
+const { 
+	title, 
+	description = "A curated showcase of applications, MVPs, and experiments.",
+	image = "/favicon.svg",
+	type = "website"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.com');
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": type === 'article' ? "SoftwareApplication" : "Person",
+  "name": title,
+  "description": description,
+  "url": canonicalURL.href,
+  "author": {
+    "@type": "Person",
+    "name": "Portfolio Owner"
+  }
+};
 ---
 
 <!doctype html>
@@ -16,6 +38,30 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Primary Meta Tags -->
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, Astro.site || 'https://example.com')} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={canonicalURL} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={new URL(image, Astro.site || 'https://example.com')} />
+
+		<!-- JSON-LD Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
 	<body class="bg-[var(--color-background)] text-[var(--color-text)] min-h-screen font-sans">
 		<slot />

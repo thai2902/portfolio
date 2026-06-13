@@ -9,7 +9,11 @@ const allApps = await getCollection('apps');
 const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
 ---
 
-<Layout title="Portfolio | App Showcase">
+<Layout 
+  title="Portfolio | App Showcase"
+  description="A curated collection of freelance projects, standalone apps, and minimum viable products (MVPs) built by Portfolio Owner."
+  type="website"
+>
   <Hero />
   
   <main id="projects" class="max-w-6xl mx-auto px-4 pb-20 pt-8">

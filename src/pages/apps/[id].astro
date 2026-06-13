@@ -26,7 +26,12 @@ const fallbackImages = [
 const imageSrc = fallbackImages[data.id % fallbackImages.length];
 ---
 
-<Layout title={`${data.title} | Portfolio`}>
+<Layout 
+  title={`${data.title} | Portfolio`}
+  description={data.short || data.features || `Explore the ${data.title} project in my portfolio.`}
+  image={imageSrc}
+  type="article"
+>
   <article class="max-w-5xl mx-auto px-4 py-12 lg:py-20">
     <!-- Back Navigation -->
     <a href="/#projects" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-black transition-colors mb-10">
