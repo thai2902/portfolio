@@ -11,23 +11,22 @@ const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
 <Layout title="Portfolio | App Showcase">
   <Hero />
   
-  <main id="projects" class="max-w-6xl mx-auto px-4 pb-20 pt-10">
-    <div class="mb-12">
-      <h2 class="text-2xl font-bold mb-4 tracking-tight">Project Catalog</h2>
-      <p class="text-[var(--color-secondary)] max-w-2xl leading-relaxed text-lg">
-        A curated collection of freelance projects, standalone apps, and minimum viable products (MVPs). Each concept is designed to solve real user problems and showcase technical execution.
-      </p>
-    </div>
+  <main id="projects" class="max-w-6xl mx-auto px-4 pb-20 pt-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 border-b border-gray-200 pb-4">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900">Project Catalog</h2>
+      </div>
 
-    <nav class="flex flex-wrap gap-6 mb-8 border-b border-gray-200 pb-4 filter-nav">
-      <button class="filter-btn active text-black font-semibold" data-filter="all">All</button>
-      <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors" data-filter="ai">AI & Tech</button>
-      <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors" data-filter="productivity">Productivity</button>
-      <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors" data-filter="finance">Finance</button>
-      <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors" data-filter="education">Education</button>
-      <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors" data-filter="health">Health</button>
-      <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors" data-filter="lifestyle">Lifestyle</button>
-    </nav>
+      <nav class="flex flex-wrap gap-4 filter-nav">
+        <button class="filter-btn active text-black font-semibold text-sm" data-filter="all">All</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="ai">AI & Tech</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="productivity">Productivity</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="finance">Finance</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="education">Education</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="health">Health</button>
+        <button class="filter-btn text-gray-400 hover:text-black font-medium transition-colors text-sm" data-filter="lifestyle">Lifestyle</button>
+      </nav>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
       {sortedApps.map((app) => (
