@@ -1,6 +1,7 @@
 ---
 id: 10
 title: "Interview Prep App"
+category: "Education"
 status: "Planning"
 roi: "High"
 short: "Ôn interview cho mobile developer."

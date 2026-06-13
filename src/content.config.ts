@@ -8,6 +8,7 @@ const appsCollection = defineCollection({
     id: z.number(),
     title: z.string(),
     status: z.string(),
+    category: z.string().optional().default('Other'),
     roi: z.string().optional(),
     short: z.string().optional(),
     why: z.string().optional(),

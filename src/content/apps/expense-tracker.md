@@ -1,6 +1,7 @@
 ---
 id: 4
 title: "Expense Tracker"
+category: "Finance"
 status: "Planning"
 roi: "High"
 short: "Quản lý chi tiêu cá nhân với biểu đồ."

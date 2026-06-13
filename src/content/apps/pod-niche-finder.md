@@ -1,6 +1,7 @@
 ---
 id: 5
 title: "POD Niche Finder"
+category: "Productivity"
 status: "Planning"
 roi: "High"
 short: "Gợi ý niche cho Print-on-Demand/Etsy."

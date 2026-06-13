@@ -1,6 +1,7 @@
 ---
 id: 1
 title: "English Speaking Practice"
+category: "Education"
 status: "In-Progress"
 roi: "High"
 featured: true

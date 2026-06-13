@@ -1,6 +1,7 @@
 ---
 id: 9
 title: "Freelance Portal"
+category: "Productivity"
 status: "TODO"
 roi: "High"
 featured: true

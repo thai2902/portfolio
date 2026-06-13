@@ -12,7 +12,10 @@ const isComingSoon = data.status.toLowerCase().includes("coming soon");
 const isFeatured = data.featured === true;
 ---
 
-<article class={`group flex flex-col h-full bg-white border border-gray-200 transition-colors duration-300 ${isFeatured ? "md:col-span-2" : ""} ${isComingSoon ? "opacity-50" : "hover:border-black cursor-pointer"}`}>
+<article 
+  data-category={data.category?.toLowerCase() || 'other'}
+  class={`app-card group flex flex-col h-full bg-white border border-gray-200 transition-colors duration-300 ${isFeatured ? "md:col-span-2" : ""} ${isComingSoon ? "opacity-50" : "hover:border-black cursor-pointer"}`}
+>
   {
     (() => {
       const fallbackImages = [
@@ -42,8 +45,14 @@ const isFeatured = data.featured === true;
       <h2 class="text-lg font-semibold leading-tight text-black mb-1">
         {data.title}
       </h2>
-      <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">
-        {data.status}
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+          {data.category}
+        </span>
+        <span class="text-gray-300">•</span>
+        <span class="text-xs font-medium text-gray-400 capitalize">
+          {data.status.toLowerCase()}
+        </span>
       </div>
     </div>
 

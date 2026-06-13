@@ -1,6 +1,7 @@
 ---
 id: 2
 title: "AI Resume Builder"
+category: "AI"
 status: "Planning"
 roi: "High"
 short: "Tạo CV nhanh từ profile và job target."

@@ -1,6 +1,7 @@
 ---
 id: 3
 title: "Invoice Generator"
+category: "AI"
 status: "Planning"
 roi: "High"
 short: "Tạo hóa đơn cho freelancer và small business."

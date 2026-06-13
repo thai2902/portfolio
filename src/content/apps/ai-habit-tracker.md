@@ -1,6 +1,7 @@
 ---
 id: 7
 title: "AI Habit Tracker"
+category: "AI"
 status: "Planning"
 roi: "High"
 short: "Theo dõi thói quen với gợi ý thông minh."
