@@ -7,5 +7,6 @@ roi: "High"
 short: "Lập kế hoạch sản phẩm digital/POD trên Etsy."
 why: "Hữu ích cho seller, dễ chuyển thành SaaS nhỏ hoặc template product."
 features: "Product roadmap, listing checklist, keyword notes, launch tracker."
-image: "/images/apps/etsy-product-planner.jpg"
+gallery:
+  - "/images/apps/etsy-product-planner.jpg"
 ---

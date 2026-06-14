@@ -2,13 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import AppCard from '../components/AppCard.astro';
+import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
+import settingsData from '../data/settings.json';
 
 const allApps = await getCollection('apps');
 const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
 ---
 
-<Layout title="Portfolio | App Showcase">
+<Layout 
+  title="Portfolio | App Showcase"
+  description="A curated collection of freelance projects, standalone apps, and minimum viable products (MVPs) built by Portfolio Owner."
+  type="website"
+>
   <Hero />
   
   <main id="projects" class="max-w-6xl mx-auto px-4 pb-20 pt-8">
@@ -35,8 +41,10 @@ const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
     </div>
   </main>
 
-  <footer class="py-8 border-t border-gray-200 text-center text-[var(--color-secondary)] text-sm mt-12">
-    <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
+  <Cta />
+
+  <footer class="py-12 text-center text-gray-400 text-sm">
+    <p>&copy; {new Date().getFullYear()} {settingsData.portfolioOwner}. All rights reserved.</p>
   </footer>
 
   <script>
