@@ -173,15 +173,15 @@ const ytThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : 
 
 <script>
   function initGallery() {
-    const mainImage = document.getElementById('main-product-image');
-    const mainVideo = document.getElementById('main-product-video');
+    const mainImage = document.getElementById('main-product-image') as HTMLImageElement;
+    const mainVideo = document.getElementById('main-product-video') as HTMLIFrameElement;
     const thumbs = document.querySelectorAll('.gallery-thumb');
     
     if (!mainImage || thumbs.length === 0) return;
     
     thumbs.forEach(thumb => {
       thumb.addEventListener('click', (e) => {
-        const btn = e.currentTarget;
+        const btn = e.currentTarget as HTMLElement;
         const type = btn.getAttribute('data-type');
         
         // Cross-fade effect
@@ -212,7 +212,7 @@ const ytThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : 
             }
             if (mainImage) {
               mainImage.classList.remove('hidden');
-              mainImage.src = src;
+              if (src) mainImage.src = src;
               mainImage.style.opacity = '1';
             }
           }
