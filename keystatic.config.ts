@@ -19,12 +19,19 @@ export default config({
         short: fields.text({ label: 'Short Description', multiline: true }),
         why: fields.text({ label: 'Why this project?', multiline: true }),
         features: fields.text({ label: 'Features (Overview)', multiline: true }),
-        image: fields.image({
-          label: 'Cover Image',
-          directory: 'public/images/apps',
-          publicPath: '/images/apps'
-        }),
         featured: fields.checkbox({ label: 'Featured Project', defaultValue: false }),
+        videoUrl: fields.url({ label: 'YouTube / Vimeo URL' }),
+        gallery: fields.array(
+          fields.image({
+            label: 'Gallery Image',
+            directory: 'public/images/apps',
+            publicPath: '/images/apps'
+          }),
+          {
+            label: 'Image Gallery',
+            itemLabel: props => props.value ? 'Image' : 'Empty Image'
+          }
+        ),
         content: fields.markdoc({
           label: 'Content',
           extension: 'md',

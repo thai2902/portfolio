@@ -11,8 +11,8 @@ interface Props {
 
 const { 
 	title, 
-	description = seoData.siteDescription,
-	image = seoData.ogImage,
+	description = (seoData as any).siteDescription || "A curated showcase of applications, MVPs, and experiments.",
+	image = (seoData as any).ogImage || "/favicon.svg",
 	type = "website"
 } = Astro.props;
 
@@ -26,7 +26,7 @@ const schema = {
   "url": canonicalURL.href,
   "author": {
     "@type": "Person",
-    "name": seoData.authorName
+    "name": (seoData as any).authorName || "Portfolio Owner"
   }
 };
 ---

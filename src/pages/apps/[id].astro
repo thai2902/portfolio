@@ -24,7 +24,17 @@ const fallbackImages = [
   "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=1200&q=80",
   "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=1200&q=80",
 ];
-const imageSrc = fallbackImages[data.id % fallbackImages.length];
+const imageSrc = (data.gallery && data.gallery.length > 0) ? data.gallery[0] : fallbackImages[data.id % fallbackImages.length];
+
+function getYoutubeVideoId(url?: string) {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+}
+const ytId = getYoutubeVideoId(data.videoUrl);
+const embedUrl = ytId ? `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1` : null;
+const ytThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : null;
 ---
 
 <Layout 
@@ -59,13 +69,50 @@ const imageSrc = fallbackImages[data.id % fallbackImages.length];
       )}
     </header>
 
-    <!-- Hero Image -->
-    <div class="relative w-full h-[40vh] min-h-[300px] md:h-[60vh] bg-gray-100 mb-16 border border-gray-200 overflow-hidden">
-      <img
-        src={imageSrc}
-        alt={data.title}
-        class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700"
-      />
+    <!-- Product Gallery -->
+    <div class="mb-16">
+      <div class="relative w-full h-[40vh] min-h-[300px] md:h-[60vh] bg-gray-100 border border-gray-200 overflow-hidden mb-4">
+        <img
+          id="main-product-image"
+          src={imageSrc}
+          alt={data.title}
+          class={`w-full h-full object-cover transition-opacity duration-200 ${embedUrl ? 'hidden' : ''}`}
+        />
+        {embedUrl && (
+          <iframe
+            id="main-product-video"
+            src={embedUrl}
+            class="absolute top-0 left-0 w-full h-full bg-black transition-opacity duration-200"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        )}
+      </div>
+      
+      <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+        <!-- Video Thumb (First) -->
+        {embedUrl && ytThumbnail && (
+          <button class="gallery-thumb relative flex-shrink-0 w-20 h-20 md:w-24 md:h-24 border-2 border-black focus:outline-none transition-colors overflow-hidden bg-black" data-type="video">
+            <img src={ytThumbnail} alt="Video Thumbnail" class="w-full h-full object-cover opacity-60" />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <svg class="w-8 h-8 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z" /></svg>
+            </div>
+          </button>
+        )}
+        <!-- Main Image Thumb (Fallback) -->
+        {(!data.gallery || data.gallery.length === 0) && (
+          <button class={`gallery-thumb flex-shrink-0 w-20 h-20 md:w-24 md:h-24 border-2 ${embedUrl ? 'border-transparent hover:border-gray-300' : 'border-black'} focus:outline-none transition-colors`} data-type="image" data-src={imageSrc}>
+            <img src={imageSrc} alt="Thumbnail cover" class="w-full h-full object-cover" />
+          </button>
+        )}
+        <!-- Gallery Images -->
+        {data.gallery && data.gallery.map((img, index) => (
+          <button class={`gallery-thumb flex-shrink-0 w-20 h-20 md:w-24 md:h-24 border-2 ${(!embedUrl && index === 0) ? 'border-black' : 'border-transparent hover:border-gray-300'} focus:outline-none transition-colors`} data-type="image" data-src={img}>
+            <img src={img} alt={`Thumbnail ${index + 1}`} class="w-full h-full object-cover" />
+          </button>
+        ))}
+      </div>
     </div>
 
     <!-- Content Grid -->
@@ -123,3 +170,65 @@ const imageSrc = fallbackImages[data.id % fallbackImages.length];
     <p>&copy; {new Date().getFullYear()} {settingsData.portfolioOwner}. All rights reserved.</p>
   </footer>
 </Layout>
+
+<script>
+  function initGallery() {
+    const mainImage = document.getElementById('main-product-image');
+    const mainVideo = document.getElementById('main-product-video');
+    const thumbs = document.querySelectorAll('.gallery-thumb');
+    
+    if (!mainImage || thumbs.length === 0) return;
+    
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', (e) => {
+        const btn = e.currentTarget;
+        const type = btn.getAttribute('data-type');
+        
+        // Cross-fade effect
+        if (mainImage) mainImage.style.opacity = '0.5';
+        if (mainVideo) mainVideo.style.opacity = '0.5';
+        
+        setTimeout(() => {
+          if (type === 'video') {
+            if (mainImage) mainImage.classList.add('hidden');
+            if (mainVideo) {
+              mainVideo.classList.remove('hidden');
+              const currentSrc = mainVideo.src;
+              if (currentSrc.includes('autoplay=0')) {
+                 mainVideo.src = currentSrc.replace(/autoplay=0/g, 'autoplay=1');
+              } else if (!currentSrc.includes('autoplay=1')) {
+                 mainVideo.src = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'autoplay=1';
+              }
+              mainVideo.style.opacity = '1';
+            }
+          } else {
+            const src = btn.getAttribute('data-src');
+            if (mainVideo) {
+              mainVideo.classList.add('hidden');
+              const currentSrc = mainVideo.src;
+              if (currentSrc.includes('autoplay=1')) {
+                mainVideo.src = currentSrc.replace(/([?&])autoplay=1/g, '$1autoplay=0');
+              }
+            }
+            if (mainImage) {
+              mainImage.classList.remove('hidden');
+              mainImage.src = src;
+              mainImage.style.opacity = '1';
+            }
+          }
+        }, 150);
+        
+        // Update borders
+        thumbs.forEach(t => {
+          t.classList.remove('border-black');
+          t.classList.add('border-transparent');
+        });
+        btn.classList.remove('border-transparent');
+        btn.classList.add('border-black');
+      });
+    });
+  }
+  
+  // Run on first load
+  initGallery();
+</script>

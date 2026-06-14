@@ -13,7 +13,8 @@ const appsCollection = defineCollection({
     short: z.string().optional(),
     why: z.string().optional(),
     features: z.string().optional(),
-    image: z.string().optional(),
+    gallery: z.array(z.string()).optional(),
+    videoUrl: z.string().optional(),
     featured: z.boolean().optional().default(false),
   }),
 });
