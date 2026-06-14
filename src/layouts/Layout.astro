@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import seoData from '../data/seo.json';
+import Navbar from '../components/Navbar.astro';
 
 interface Props {
 	title: string;
@@ -64,7 +65,8 @@ const schema = {
 		<!-- JSON-LD Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
-	<body class="bg-[var(--color-background)] text-[var(--color-text)] min-h-screen font-sans">
+	<body class="bg-[var(--color-background)] text-[var(--color-text)] min-h-screen font-sans flex flex-col">
+		<Navbar />
 		<slot />
 	</body>
 </html>

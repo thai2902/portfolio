@@ -6,7 +6,8 @@ import settingsData from '../../data/settings.json';
 
 export async function getStaticPaths() {
   const apps = await getCollection('apps');
-  return apps.map(app => ({
+  const publishedApps = apps.filter(app => app.data.publishStatus === 'published');
+  return publishedApps.map(app => ({
     params: { id: app.id },
     props: { app },
   }));
@@ -120,13 +121,6 @@ const ytThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : 
       
       <!-- Left Column: Main Content -->
       <div class="md:col-span-2 prose prose-lg prose-slate max-w-none">
-        {data.why && (
-          <div class="mb-10 p-6 bg-gray-50 border-l-4 border-black">
-            <h3 class="text-lg font-semibold text-black mt-0 mb-2">Why this project?</h3>
-            <p class="text-gray-700 m-0 text-base">{data.why}</p>
-          </div>
-        )}
-        
         <h2 class="text-2xl font-bold text-black mb-4">Overview & Features</h2>
         <p class="text-gray-600 leading-relaxed mb-8">
           {data.features || "Detailed information about this project is currently being compiled. Stay tuned for more updates on features, technical stack, and outcomes."}
@@ -148,13 +142,6 @@ const ytThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : 
           <p class="font-medium text-black">{data.category}</p>
         </div>
         
-        {data.roi && (
-          <div class="border-t border-gray-200 pt-6">
-            <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Impact / ROI</h4>
-            <p class="font-medium text-black">{data.roi}</p>
-          </div>
-        )}
-        
         <div class="border-t border-gray-200 pt-6">
           <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Status</h4>
           <p class="font-medium text-black">{data.status}</p>
@@ -173,15 +160,15 @@ const ytThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : 
 
 <script>
   function initGallery() {
-    const mainImage = document.getElementById('main-product-image');
-    const mainVideo = document.getElementById('main-product-video');
+    const mainImage = document.getElementById('main-product-image') as HTMLImageElement;
+    const mainVideo = document.getElementById('main-product-video') as HTMLIFrameElement;
     const thumbs = document.querySelectorAll('.gallery-thumb');
     
     if (!mainImage || thumbs.length === 0) return;
     
     thumbs.forEach(thumb => {
       thumb.addEventListener('click', (e) => {
-        const btn = e.currentTarget;
+        const btn = e.currentTarget as HTMLElement;
         const type = btn.getAttribute('data-type');
         
         // Cross-fade effect
@@ -212,7 +199,7 @@ const ytThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : 
             }
             if (mainImage) {
               mainImage.classList.remove('hidden');
-              mainImage.src = src;
+              if (src) mainImage.src = src;
               mainImage.style.opacity = '1';
             }
           }
