@@ -8,6 +8,8 @@ import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 
+const isBuild = process.env.NODE_ENV === 'production';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
@@ -15,5 +17,9 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap(), react(), keystatic()]
+  integrations: [
+    sitemap(), 
+    react(), 
+    ...(isBuild ? [] : [keystatic()])
+  ]
 });
