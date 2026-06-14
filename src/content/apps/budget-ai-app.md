@@ -1,12 +1,11 @@
 ---
 publishStatus: published
-id: 7
-title: AI Habit Tracker
+id: 8
+title: Budget AI App
 category: AI
 status: Planning
-short: Theo dõi thói quen với gợi ý thông minh.
-features: Habit list, streaks, reminders, AI suggestions.
-videoUrl: https://youtu.be/dsTXcSeAZq8
+short: App quản lý ngân sách cá nhân có gợi ý AI.
+features: Budget planning, category caps, AI tips, monthly summary.
 gallery:
   - https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80
   - https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=1200&q=80

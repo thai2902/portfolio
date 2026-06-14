@@ -7,7 +7,8 @@ import { getCollection } from 'astro:content';
 import settingsData from '../data/settings.json';
 
 const allApps = await getCollection('apps');
-const sortedApps = allApps.sort((a, b) => a.data.id - b.data.id);
+const publishedApps = allApps.filter(app => app.data.publishStatus === 'published');
+const sortedApps = publishedApps.sort((a, b) => a.data.id - b.data.id);
 ---
 
 <Layout 

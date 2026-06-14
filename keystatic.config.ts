@@ -14,10 +14,16 @@ export default config({
         title: fields.slug({ name: { label: 'Title' } }),
         id: fields.integer({ label: 'Sort ID (Number)' }),
         status: fields.text({ label: 'Status', defaultValue: 'Coming soon...' }),
+        publishStatus: fields.select({
+          label: 'Publish Status',
+          options: [
+            { label: 'Published', value: 'published' },
+            { label: 'Unpublished', value: 'unpublished' }
+          ],
+          defaultValue: 'unpublished'
+        }),
         category: fields.text({ label: 'Category', defaultValue: 'Other' }),
-        roi: fields.text({ label: 'Impact / ROI' }),
         short: fields.text({ label: 'Short Description', multiline: true }),
-        why: fields.text({ label: 'Why this project?', multiline: true }),
         features: fields.text({ label: 'Features (Overview)', multiline: true }),
         featured: fields.checkbox({ label: 'Featured Project', defaultValue: false }),
         videoUrl: fields.url({ label: 'YouTube / Vimeo URL' }),
